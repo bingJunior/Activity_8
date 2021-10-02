@@ -12,6 +12,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:padding="5dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/text_view"
         android:fontFamily="@font/adamina"
@@ -29,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:padding="5dp"
         android:background="@drawable/text_view"
         android:fontFamily="@font/adamina"
         android:text="@string/time_left"
@@ -53,4 +55,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

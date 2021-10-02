@@ -12,8 +12,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.umair.timefighter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private lateinit var tapMeButton: Button
     private lateinit var gameScoreTextView: TextView
@@ -35,7 +38,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Log.d(TAG, "onCreate called. Score is: $score")
 
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         gameScoreTextView = findViewById(R.id.gameScoreTextView)
         timeLeftTextView = findViewById(R.id.timeLeftTextView)
 
-        tapMeButton.setOnClickListener { v ->
+        binding.tapMeButton.setOnClickListener { v ->
             val bounceAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce)
             v.startAnimation(bounceAnimation)
             incrementScore()
@@ -65,9 +69,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-       if (item.itemId == R.id.actionAbout) {
-           showInfo()
-       }
+        if (item.itemId == R.id.actionAbout) {
+            showInfo()
+        }
         return true
     }
 
@@ -92,6 +96,32 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onSaveInstanceState: Saving Score: $score & Time Left: $timeLeftOnTimer")
     }
 
+    //Activity LifeCycle Methods
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart called.")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume called.")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause called.")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop called.")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart called.")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "onDestroy called.")
@@ -103,7 +133,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         score += 1
-        val newScore = getString(R.string.your_score,score)
+        val newScore = getString(R.string.your_score, score)
         gameScoreTextView.text = newScore
 
         val blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink)
@@ -115,7 +145,7 @@ class MainActivity : AppCompatActivity() {
         score = 0
 
         // Show score
-        gameScoreTextView.text = getString(R.string.your_score,score)
+        gameScoreTextView.text = getString(R.string.your_score, score)
 
         // Show initial time left
         val initialTimeLeft = initialCountDown / 1000
